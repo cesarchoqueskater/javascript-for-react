@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Literals - expresione</title>
+</head>
+
+<body>
+    <script>
+        const nombre = 'Cesar'
+        console.log(`Mi nombre es ${nombre}`)
+        console.log(`Mi nombre es ${29}`)
+        console.log(`Este es el ${'Curso de Javascript Avanzadp'}`)
+        console.log(`Mi nombre es ${x = 'cesar'}`)
+        console.log(`Mi nombre es ${(function name() { return 'Cesar Alfonso' })()}`)
+        console.log(`Mi nombre es ${(function () { return 'Cesar Choquehuanca' })()}`)
+        console.log(`Mi nombre es ${(() => { return 'Cesar Choquehuanca Delgado' })()}`)
+        console.log(`Mi nombre es ${ true && 'Cesar Ternario'}`)
+        console.log(`Mi nombre es ${ false ? 'Cesar Ternario' : 'Cesar False'}`)
+        console.log(`Mi nombre es ${ ['a','b'].map(letra => `${letra}-styled`)}`)
+    </script>
+</body>
+
+</html>
