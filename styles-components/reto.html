@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Styles components</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,26 +33,28 @@
                 return newContent.join('')
             }
         }
-        const elements = ["h1", "h2", "h3", "div", "pre", "blockquote"]
 
-        const styles = function() {
-            elements.forEach((value, index) => {
-                let styled = {}
+        const elementos = ["h1", "h2", "pre", "blockquote"]
 
-                styled[value] = (styles) => {
+        function getTagElement(elements) {
+
+            let styled = {}
+            elements.forEach((element) => {
+                    console.log(element)
+                    console.log(styled[element])
+                    styled[element] = (styles) => {
                         return (content) => {
-                            return `<${value} style="${styles}">${content}</${value}>`
+                            return `<${element} style="${styles}">${content}</${element}>`
                         }
                     }
-                    // console.log(styled)
-                return styled
-            })
+                })
+                // console.log(styled)
+            return styled
         }
-        const styled = styles(elements)
 
-        // console.log(styles)
+        const styled = getTagElement(elementos)
 
-        // setElementTag()
+
         // const styled = {
         //     h1: function(styles) {
         //         return function(content) {
@@ -49,28 +62,31 @@
         //                 <h1 style="${styles}">${content}</h1>
         //             `
         //         }
-        //     },
-        //     h2: function(styles) {
-        //         return function(content) {
-        //             return `
-        //                 <h2 style="${styles}">${content}</h2>
-        //             `
-        //         }
         //     }
         // }
 
         const TitleStyled = styled.h1 `font-family:system-ui;color:orange;`
-            // console.log("🚀 ~ file: reto.html ~ line 58 ~ TitleStyled", TitleStyled)
-
         const SubTitleStyled = styled.h2 `font-family:system-ui;color:red;`
+        const PreContentStyled = styled.pre `background:#3a3539;color:#fff;padding:40px;overflow:auto;border-radius:8px;margin-block-end:30px;`
+        const BlockquoteContentStyled = styled.pre `background:#3a3539;color:#fff;padding:40px;overflow:auto;border-radius:8px;margin-block-end:30px;`
 
         const props = {
-            message: 'No te rindas',
-            subtitle: 'Subtitulo'
+            title: 'No te rindas',
+            subtitle: 'Sigue practicando !!!',
+            precontent: `“Este es el inicio de tu carrera como Desarrollador Web”`,
+            blockquote: ` 
+    function holaMundo(variable) {
+        console.log(variable)
+    }
+
+    holaMundo('Primer Hola Mundo !!!')
+                        `
         }
 
-        const Title = component `<div> ${'message'} </div>` (props)
-        const SubTitle = component `<div> ${'subtitle'} </div>` (props)
+        const Title = component `${'title'}` (props)
+        const SubTitle = component `${'subtitle'}` (props)
+        const PreContent = component `${'precontent'}` (props)
+        const Blockquote = component `${'blockquote'}` (props)
 
         function render(component, container) {
             container.innerHTML += component
@@ -78,6 +94,8 @@
 
         render(TitleStyled(Title), window.container)
         render(SubTitleStyled(SubTitle), window.container)
+        render(PreContentStyled(PreContent), window.container)
+        render(BlockquoteContentStyled(Blockquote), window.container)
     </script>
 </body>
 
