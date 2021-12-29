@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShortHand Property Names</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <main>
+        <h1>
+            La mejor. <br> Para los mejores
+        </h1>
+        <div class="hero">
+            <div class="wrapper">
+                <div class="hero-content">
+                    <div class="mac"></div>
+                    <div class="app">
+                        <p>
+                            <strong>
+                                Precio:
+                            </strong>
+                            <span id="price">-</span>
+                        </p>
+                        <p>
+                            <strong>
+                                Precio oferta:
+                            </strong>
+                            <span id="offer">-</span>
+                        </p>
+                        <p>
+                            <strong>
+                                Precio Final:
+                            </strong>
+                            <span id="final-price">-</span>
+                        </p>
+                        <button class="button" id="make-offer">Regatear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const price = 2700
+        const macbook = {
+            price,
+            get finalPrice() {
+                return this.price * 1.16
+            },
+            set offer(offer) {
+                this.price -= offer
+            },
+            // getPrice: function(){
+
+            // },
+            // Lo comentado arriba es igual a crear esta funcion
+            getPrice() {
+                console.log(this.price)
+            },
+            // Los Generadores siempre comienzan con un *
+            * discount(offer) {
+                // Los yield son los valores que se devuelven dentro de una funcion generadora
+                // yield 'Primer Yield'
+                // yield 'Segundo Yield'
+                // yield 'Tercero Yield'
+                let price = this.finalPrice
+                while (true) {
+                    yield price -= offer
+                }
+            }
+        }
+        window.price.textContent = macbook.price
+            // Esta linea ejecuta el set offer function automaticamente, cambiando internamente el precio
+        macbook.offer = 500
+            // Ya una vez modificado el precio internamente, solo queda llamarlo
+        window.offer.textContent = macbook.price
+            // No es necesario llamar finalPrice(), pues es un get dentro de un objeto
+        window['final-price'].textContent = macbook.finalPrice
+
+        const makeAnOffer = macbook.discount(15)
+        window['make-offer'].addEventListener('click', () => {
+            // Con el metodo next, en base a un generador nos permite recorrer los diversos yield que tuviese este
+            // console.log(makeAnOffer.next())
+            window['final-price'].textContent = makeAnOffer.next().value
+        })
+    </script>
+</body>
+
+</html>
